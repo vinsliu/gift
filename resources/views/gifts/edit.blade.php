@@ -1,32 +1,57 @@
-<h1>Modifier le cadeau</h1>
+@extends('layouts.app')
 
-<form method="POST" action="{{ route('gifts.update', $gift) }}">
-    @csrf
-    @method('PUT')
+@section('title', 'Modifier le cadeau')
 
-    <label for="name">Nom</label><br>
-    <input type="text" name="name" id="name" value="{{ old('name', $gift->name) }}"><br>
-    @error('name')
-    <p>{{ $message }}</p>
-    @enderror
+@section('content')
+<div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 mt-8">
+    <h1 class="text-2xl font-bold text-gray-900 mb-6">Modifier le cadeau</h1>
 
-    <label for="url">URL</label><br>
-    <input type="text" name="url" id="url" value="{{ old('url', $gift->url) }}"><br>
-    @error('url')
-    <p>{{ $message }}</p>
-    @enderror
+    <form method="POST" action="{{ route('gifts.update', $gift) }}" class="space-y-5">
+        @csrf
+        @method('PUT')
 
-    <label for="details">Détails</label><br>
-    <textarea name="details" id="details">{{ old('details', $gift->details) }}</textarea><br>
-    @error('details')
-    <p>{{ $message }}</p>
-    @enderror
+        <div>
+            <label for="name" class="block text-gray-700 font-semibold mb-1">Nom</label>
+            <input type="text" name="name" id="name" value="{{ old('name', $gift->name) }}"
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            @error('name')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <label for="price">Prix</label><br>
-    <input type="text" name="price" id="price" value="{{ old('price', $gift->price) }}"><br>
-    @error('price')
-    <p>{{ $message }}</p>
-    @enderror
+        <div>
+            <label for="url" class="block text-gray-700 font-semibold mb-1">URL</label>
+            <input type="text" name="url" id="url" value="{{ old('url', $gift->url) }}"
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            @error('url')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <button type="submit">Mettre à jour</button>
-</form>
+        <div>
+            <label for="details" class="block text-gray-700 font-semibold mb-1">Détails</label>
+            <textarea name="details" id="details" rows="4"
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('details', $gift->details) }}</textarea>
+            @error('details')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label for="price" class="block text-gray-700 font-semibold mb-1">Prix</label>
+            <input type="text" name="price" id="price" value="{{ old('price', $gift->price) }}"
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            @error('price')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <button type="submit"
+                class="w-full bg-green-500 text-white font-semibold px-4 py-3 rounded-lg hover:bg-green-600 transition-colors duration-200 shadow">
+                Mettre à jour
+            </button>
+        </div>
+    </form>
+</div>
+@endsection
