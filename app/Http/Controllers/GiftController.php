@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreGiftRequest;
 use App\Models\Gift;
 use Illuminate\Http\Request;
 
@@ -27,16 +28,9 @@ class GiftController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreGiftRequest $request)
     {
-        $validated = $request->validate([
-            'name'      => 'required|string|min:3|max:50',
-            'url'       => 'nullable|url|url:http,https',
-            'details'   => 'nullable|string',
-            'price'     => 'required|numeric|decimal:0,2',
-        ]);
-
-        Gift::create($validated);
+        Gift::create($request->validated());
 
         return redirect()->route('gifts.index');
     }
@@ -60,16 +54,9 @@ class GiftController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Gift $gift)
+    public function update(StoreGiftRequest $request, Gift $gift)
     {
-        $validated = $request->validate([
-            'name'      => 'required|string|min:3|max:50',
-            'url'       => 'nullable|url|url:http,https',
-            'details'   => 'nullable|string',
-            'price'     => 'required|numeric|decimal:0,2',
-        ]);
-
-        $gift->update($validated);
+        $gift->update($request->validated());
 
         return redirect()->route('gifts.index');
     }
