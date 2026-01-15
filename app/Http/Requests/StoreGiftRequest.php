@@ -28,4 +28,21 @@ class StoreGiftRequest extends FormRequest
             'price'     => 'required|numeric|decimal:0,2',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required'  => 'Le nom du cadeau est obligatoire.',
+            'name.min'       => 'Le nom doit faire au moins :min caractères.',
+            'name.max'       => 'Le nom ne peut pas dépasser :max caractères.',
+            'url.url'        => 'L\'url doit débuter avec http ou https.',
+            'price.required' => 'Le prix est obligatoire.',
+            'price.numeric'  => 'Le prix doit être un nombre.',
+        ];
+    }
 }
